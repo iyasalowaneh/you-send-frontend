@@ -1,0 +1,67 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import "../App.css"
+import { useHistory } from "react-router-dom";
+//actions
+import { signup } from "../store/actions/authActions";
+//import { updateUser } from "../store/actions/userActions";
+const Signup = () => {
+
+
+//   const users = useSelector((state) => state.users.users);
+//   const updatedUser = users.find(
+   // (user) => user.slug === userSlug
+  //);
+  const [user, SetUser] = useState({
+ 
+        phonenumber: "",
+
+    }
+  );
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleChange = (event) => {
+    SetUser({ ...user, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+     dispatch(signup(user,history));
+    
+  };
+
+  return (
+      <>
+   
+
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Register</h3>
+		
+			</div>
+			<div class="card-body">
+				<form onSubmit={handleSubmit} >
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control"  name="phonenumber" onChange={handleChange} placeholder="enter your number"   value={user.phonenumber}
+/>
+						
+					</div>
+				
+          <button type="submit">get code</button>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+      </>
+  );
+};
+
+export default Signup;

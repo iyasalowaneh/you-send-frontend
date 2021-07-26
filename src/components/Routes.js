@@ -1,19 +1,23 @@
 import { Route, Switch } from "react-router";
 //Home components
-// import Home from "./Home";
-// import Signup from "./users/Signup";
-// import Signin from "./users/Signin";
+ //import Home from "./Home";
+ import Signup from "./Sginup";
+ import Verify from "./Verify";
 import { useSelector } from "react-redux";
 
 function Routes(props) {
-  const user = useSelector((state) => state.users.users);
+ // const user = useSelector((state) => state.users.users);
 
   return (
     <Switch>
-      <Route exact path="/">
-        <Home />
+      <Route  path="/Verify">
+        <Verify />
       </Route>
-    </Switch>
+
+      <Route exact path="/">
+        <Signup />
+      </Route>
+    </Switch> 
   );
 }
 export default Routes;
