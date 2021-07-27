@@ -72,4 +72,27 @@ export const signup = (userData,history) => {
       };
     }
   };
+
+
+  export const updateUser = (updateUser) => {
+    return async (dispatch) => {
+      console.log(updateUser);
+      try {
+        const formData = new FormData();
+        for (const key in updateUser)
+          formData.append(key, updateUser[key]);
+  
+        const res = await axios.put(
+          `http://localhost:8000/users/${updateUser.id}`,
+          formData
+        );
+        dispatch({
+          type: actionTypes.UPDATE_USER,
+          payload: { updateUsers: res.data },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
   

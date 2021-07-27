@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router";
  //import Home from "./Home";
  import Signup from "./Sginup";
  import Verify from "./Verify";
+ import Profile from "./Profile"
 import { useSelector } from "react-redux";
 
 function Routes(props) {
@@ -10,6 +11,10 @@ function Routes(props) {
 
   return (
     <Switch>
+  {/* <Route  path="/:userId">
+        <Profile />
+      </Route> */}
+
       <Route  path="/Verify">
         <Verify />
       </Route>

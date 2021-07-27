@@ -11,9 +11,21 @@ const reducer = (state = initialState, action) => {
     ...state,
     user: action.payload,
   };
+
+
+  case types.UPDATE_USER:
+      const { updateUsers } = action.payload;
+
+      return {
+        ...state,
+        users: state.users.map((user) =>
+        user.id === updateUsers.id ? updateUsers : user
+        ),
+      };
     default:
       return state;
   }
 };
 
 export default reducer;
+
