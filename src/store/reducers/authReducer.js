@@ -1,25 +1,32 @@
 import * as types from "../actions/types";
 
 const initialState = {
-  user: null,
+  user: [],
+  users: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SET_USER:
-  return {
-    ...state,
-    user: action.payload,
-  };
+      return {
+        ...state,
+        user: action.payload,
+      };
 
+    case types.FETCH_USER:
+      console.log(action.payload)
+      return {
+        ...state,
+        users: action.payload.users,
+      };
 
-  case types.UPDATE_USER:
+    case types.UPDATE_USER:
       const { updateUsers } = action.payload;
 
       return {
         ...state,
-        users: state.users.map((user) =>
-        user.id === updateUsers.id ? updateUsers : user
+        user: state.users.map((user) =>
+          user.id === updateUsers.id ? updateUsers : user
         ),
       };
     default:
@@ -28,4 +35,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-
