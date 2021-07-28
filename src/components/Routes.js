@@ -21,7 +21,7 @@ function Routes(props) {
         <RoomList />
       </Route>
 
-      <Route path="/ChatList">
+      <Route path="/rooms/:roomSlug">
         <ChatList />
       </Route>
       <Route path="/Verify">

@@ -2,7 +2,6 @@ import * as types from "../actions/types";
 
 const initialState = {
   user: [],
-  users: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,12 +12,6 @@ const reducer = (state = initialState, action) => {
         user: action.payload,
       };
 
-    case types.FETCH_USER:
-      console.log(action.payload)
-      return {
-        ...state,
-        users: action.payload.users,
-      };
 
     case types.UPDATE_USER:
       const { updateUsers } = action.payload;

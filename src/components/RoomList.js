@@ -4,13 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../store/actions/authActions";
 import "../ChatList.css";
 import "../Chat.css";
+import { useParams } from "react-router";
 
 const RoomList = () => {
+
   const users = useSelector((state) => state.userReducer.users);
-  console.log(users);
   const RoomListOne = users.map((user) => (
     <RoomItem user={user} key={user.id} />
   ));
+  // const messg = messages.map((message) => (
+  //   <RoomItem message={message} key={message.id} />
+  // ));
+
+
+
+
+
   return (
     <>
       <head>
@@ -38,24 +47,87 @@ const RoomList = () => {
           src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
         />
       </head>
-
-      <div class="container-fluid h-100">
+    <div>
         <div class="row justify-content-center h-100">
           <div class="col-md-4 col-xl-3 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
             <div class="card-header">
               <input type="text" placeholder="Search..." name="" />
-              <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary">
                 <i class="fas fa-search"></i>
               </button>
-              <div class="card-body contacts_body">
-                {RoomListOne}
-                <></>
-              </div>
+                </div>
+              
+            <div class="card-body contacts_body">
+              <ui class="contacts">
+              {RoomListOne}
+        
+           
+              </ui>
             </div>
+            <div class="card-footer"></div>
+          </div></div>
+          <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+              <div class="card-header msg_head">
+                <div class="d-flex bd-highlight">
+                <div class="heading-avatar-icon">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img"/>
+                    <span class="online_icon"></span>
+                  </div>
+                  <div class="user_info">
+                    <span>Chat with Khalid</span>
+                  </div>
+                  <div class="video_cam">
+                    <span><i class="fas fa-video"></i></span>
+                    <span><i class="fas fa-phone"></i></span>
+                  </div>
+                </div>
+                <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                <div class="action_menu">
+                  <ul>
+                    <li><i class="fas fa-user-circle"></i> View profile</li>
+                    <li><i class="fas fa-users"></i> Add to close friends</li>
+                    <li><i class="fas fa-plus"></i> Add to group</li>
+                    <li><i class="fas fa-ban"></i> Block</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body msg_card_body">
+                <div class="d-flex justify-content-start mb-4">
+                  <div class="heading-avatar-icon">
+                    <img
+                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user_img_msg"
+                    />
+                    <p class="msg_cotainer">ghj</p>
+                  </div>
+                </div>              
+
+        
+              
+             
+              </div>
+            
+              <div class="card-footer">
+                <div class="input-group">
+                  <i class="fas fa-paperclip"></i>
+
+                  <textarea
+                    name=""
+                    class="form-control type_msg"
+                    placeholder="Type your message..."
+                  ></textarea>
+                  <i class="fas fa-location-arrow"></i>
+                </div>
+                </div>
+                </div>
           </div>
         </div>
       </div>
-    </>
+  </>
+  
   );
 };
+
 export default RoomList;
