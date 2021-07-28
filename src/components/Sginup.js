@@ -1,26 +1,38 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import "../App.css";
 import { useHistory } from "react-router-dom";
-//actions
+
+import { useSelector } from "react-redux"; //Remove unused import
+import { useParams } from "react-router-dom"; //Remove unused import
+
+//Styling
+import "../App.css";
+
+//Actions
 import { signup } from "../store/actions/authActions";
-//import { updateUser } from "../store/actions/userActions";
+//import { updateUser } from "../store/actions/userActions"; //Remove unused import
+
 const Signup = () => {
+  //Remove unused code
   //   const users = useSelector((state) => state.users.users);
   //   const updatedUser = users.find(
   // (user) => user.slug === userSlug
   //);
+
+  //setUser instead of SetUser
   const [user, SetUser] = useState({
     name: "",
     phonenumber: "",
   });
+
   const dispatch = useDispatch();
+
   const history = useHistory();
+
   const handleChange = (event) => {
     SetUser({ ...user, [event.target.name]: event.target.value });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signup(user, history));
@@ -51,7 +63,6 @@ const Signup = () => {
                     value={user.phonenumber}
                   />
                 </div>
-
                 <div class="input-group form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -67,7 +78,6 @@ const Signup = () => {
                     value={user.name}
                   />
                 </div>
-
                 <button type="submit">get code</button>
               </form>
             </div>

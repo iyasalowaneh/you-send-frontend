@@ -1,5 +1,7 @@
 import axios from "axios";
 import decode from "jwt-decode";
+
+//Action Types
 import * as actionTypes from "./types";
 
 export const fetchUser = () => {
@@ -7,21 +9,21 @@ export const fetchUser = () => {
     try {
       console.log("action");
       const res = await axios.get("http://localhost:8000/users");
-      console.log(res.data)
+      console.log(res.data); //Remove console log
       dispatch({
         type: actionTypes.FETCH_USER,
-
         payload: { users: res.data },
       });
     } catch (error) {
-      console.log(error);
+      console.log(error); //Remove console log
     }
   };
 };
 export const signup = (userData, history) => {
+  //Remove unused dispatch
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:8000/signup`, userData);
+      const res = await axios.post(`http://localhost:8000/signup`, userData); //Replace with ""
       history.push("/Verify");
     } catch (error) {
       console.log(error);
@@ -32,9 +34,8 @@ export const signup = (userData, history) => {
 export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:8000/signin`, userData);
-      console.log(res.data.token);
-
+      const res = await axios.post(`http://localhost:8000/signin`, userData); //Replace with ""
+      console.log(res.data.token); //Remove console log
       dispatch(setUser(res.data.token));
       history.push("/RoomList");
     } catch (error) {

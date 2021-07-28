@@ -1,10 +1,13 @@
-import './App.css';
+//Components
 import Routes from "./components/Routes";
+
+//Styling
+import "./App.css";
+
 function App() {
   return (
-    <div >
-      <Routes  />
-
+    <div>
+      <Routes />
     </div>
   );
 }
