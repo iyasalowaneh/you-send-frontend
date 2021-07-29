@@ -1,12 +1,13 @@
 import axios from "axios";
 import decode from "jwt-decode";
 import * as actionTypes from "./types";
+import instance from "./instance";
 
 
 export const signup = (userData, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:8000/signup`, userData);
+      const res = await instance.post(`/signup`, userData);
       history.push("/Verify");
     } catch (error) {
       console.log(error);
@@ -14,14 +15,16 @@ export const signup = (userData, history) => {
   };
 };
 
+
+
 export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:8000/signin`, userData);
+      const res = await instance.post(`/signin`, userData);
       console.log(res.data.token);
 
       dispatch(setUser(res.data.token));
-      history.push("/RoomList");
+      history.push("/rooms");
     } catch (error) {
       console.log(error);
     }
@@ -47,24 +50,23 @@ export const checkForToken = () => {
     payload: null,
   };
 };
-
 const setUser = (token) => {
-  console.log(token);
   if (token) {
     localStorage.setItem("myToken", token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     return {
       type: actionTypes.SET_USER,
       payload: decode(token),
     };
   } else {
     localStorage.removeItem("myToken");
+    delete instance.defaults.headers.common.Authorization;
     return {
       type: actionTypes.SET_USER,
       payload: null,
     };
   }
 };
-
 export const updateUser = (updateUser) => {
   return async (dispatch) => {
     console.log(updateUser);
@@ -72,7 +74,7 @@ export const updateUser = (updateUser) => {
       const formData = new FormData();
       for (const key in updateUser) formData.append(key, updateUser[key]);
 
-      const res = await axios.put(
+      const res = await instance.put(
         `http://localhost:8000/users/${updateUser.id}`,
         formData
       );

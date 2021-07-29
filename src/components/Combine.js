@@ -1,24 +1,15 @@
 import RoomList from "./RoomList";
 import ChatList from "./ChatList";
-import { DivOne, DivTow} from "../Styles";
+import { DivOne, DivTow } from "../Styles";
 
 const Combine = (props) => {
- 
-
-
   return (
-<> 
-      <DivOne>
-<RoomList/>
-          <DivTow>
+    <DivTow>
+      <RoomList />
 
- <ChatList/>
-</DivTow>
-
-</DivOne>
- 
-       </> 
-             )
+      <ChatList />
+    </DivTow>
+  );
 };
 
 export default Combine;
