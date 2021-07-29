@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import { useSelector } from "react-redux";
 import RoomList from "./RoomList";
 import ChatList from "./ChatList";
+import Combine from "./Combine";
 
 function Routes(props) {
   // const user = useSelector((state) => state.users.users);
@@ -16,12 +17,14 @@ function Routes(props) {
       {/* <Route  path="/:userId">
         <Profile />
       </Route> */}
-
+    <Route path="/combine">
+        <Combine />
+      </Route>
       <Route path="/RoomList">
         <RoomList />
       </Route>
 
-      <Route path="/rooms/:roomSlug">
+      <Route path="/rooms">
         <ChatList />
       </Route>
       <Route path="/Verify">

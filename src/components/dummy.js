@@ -1,22 +1,19 @@
+import RoomItem from "./RoomItem";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../store/actions/authActions";
+import "../ChatList.css";
 import "../Chat.css";
-import ChatItem from "./ChatItem";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-const ChatList = () => {
-  const messages = useSelector((state) => state.messages.messages);
-  console.log(messages)
-
-
-  const ChatListOne = messages.map((message) => (
-    <ChatItem message={message} key={message.id} />
+const RoomList = () => {
+  const users = useSelector((state) => state.userReducer.users);
+  const RoomListOne = users.map((user) => (
+    <RoomItem user={user} key={user.id} />
   ));
-
-//   const user = users.find((user) => user.slug === userSlug);
-
-//   const getIdBy = (messageId) => messages.find((message) => message.id === messageId);
-
-//   const userRoom = user.messages.map((message) => getIdBy(message.id));
+  // const messg = messages.map((message) => (
+  //   <RoomItem message={message} key={message.id} />
+  // ));
 
   return (
     <>
@@ -45,10 +42,23 @@ const ChatList = () => {
           src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
         />
       </head>
-
-      <div class="container-fluid h-100">
+      <div>
         <div class="row justify-content-center h-100">
-          <div class="col-md-4 col-xl-3 chat"></div>
+          <div class="col-md-4 col-xl-3 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
+              <div class="card-header">
+                <input type="text" placeholder="Search..." name="" />
+                <button type="button" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+
+              <div class="card-body contacts_body">
+                <ui class="contacts">{RoomListOne}</ui>
+              </div>
+              <div class="card-footer"></div>
+            </div>
+          </div>
           <div class="col-md-8 col-xl-6 chat">
             <div class="card">
               <div class="card-header msg_head">
@@ -59,7 +69,9 @@ const ChatList = () => {
                       class="rounded-circle user_img"
                     />
                     <span class="online_icon"></span>
-                    <span>Chat with Ali </span>
+                  </div>
+                  <div class="user_info">
+                    <span>Chat with Khalid</span>
                   </div>
                   <div class="video_cam">
                     <span>
@@ -90,7 +102,6 @@ const ChatList = () => {
                   </ul>
                 </div>
               </div>
-
               <div class="card-body msg_card_body">
                 <div class="d-flex justify-content-start mb-4">
                   <div class="heading-avatar-icon">
@@ -101,10 +112,6 @@ const ChatList = () => {
                     <p class="msg_cotainer">ghj</p>
                   </div>
                 </div>
-                {ChatListOne}
-
-
-
               </div>
 
               <div class="card-footer">
@@ -126,4 +133,5 @@ const ChatList = () => {
     </>
   );
 };
-export default ChatList;
+
+export default RoomList;
