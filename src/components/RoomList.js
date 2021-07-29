@@ -1,24 +1,37 @@
 import RoomItem from "./RoomItem";
+import GroupChatItem from "./GroupChatItem";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../store/actions/authActions";
 import "../ChatList.css";
 import "../Chat.css";
 import { useParams } from "react-router";
+import { createRoom } from "../store/actions/roomListActions";
 
 const RoomList = () => {
-
   const users = useSelector((state) => state.userReducer.users);
+  const rooms = useSelector((state) => state.rooms.rooms);
   const RoomListOne = users.map((user) => (
     <RoomItem user={user} key={user.id} />
   ));
-  // const messg = messages.map((message) => (
-  //   <RoomItem message={message} key={message.id} />
-  // ));
 
 
+  const roomLi = rooms.map((room) => (
+    <GroupChatItem room={room} key={room.id} />
+  ));
+  const [room, setRoom] = useState({
+    name: "",
+  });
 
+  const dispatch = useDispatch();
+  const handleChange = (event) => {
+    setRoom({ ...room, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    dispatch(createRoom(room));
+  };
 
   return (
     <>
@@ -47,31 +60,46 @@ const RoomList = () => {
           src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
         />
       </head>
-    <div>
-        <div class="row justify-content-center h-100">
-          <div class="col-md-4 col-xl-3 chat">
-            <div class="card mb-sm-3 mb-md-0 contacts_card">
-            <div class="card-header">
-              <input type="text" placeholder="Search..." name="" />
-                <button type="button" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-              </button>
+      <div>
+        <div class="container-fluid h-100">
+          <div class="row justify-content-left h-100">
+            <div>
+              <div class="card mb-sm-1 mb-md-0 contacts_card">
+                <div class="card-header">
+                  <input type="text" placeholder="Search..." />
+                  <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <form onSubmit={handleSubmit}>
+                    <div class="mb-0">
+                      <label
+                        for="formGroupExampleInput"
+                        class="form-label"
+                      ></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formGroupExampleInput"
+                        placeholder="Enter the product name"
+                        name="name"
+                        onChange={handleChange}
+                        value={room.name}
+                      />
+                    </div>
+                    <button type="submit"> Submit</button>
+                  </form>
+                  <div class="card-body contacts_body">
+                    <ui class="contacts">{RoomListOne}
+                    
+                    group {roomLi}</ui>
+                  </div>
                 </div>
-              
-            <div class="card-body contacts_body">
-              <ui class="contacts">
-              {RoomListOne}
-        
-           
-              </ui>
+              </div>
             </div>
-         
-            </div>
-            </div>
+          </div>
         </div>
       </div>
-  </>
-  
+    </>
   );
 };
 
