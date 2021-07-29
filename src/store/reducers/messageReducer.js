@@ -11,14 +11,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         messages: action.payload.messages,
       };
-    // case actionType.ADD_SHOP:
-    //   const { newShop } = action.payload;
-    //   newShop.slug = slugify(newShop.name);
-
-    //   return {
-    //     ...state,
-    //     products: [...state.products, newShop],
-    //   };
+      case actionType.ADD_MESSAGE:
+        return {
+          ...state,
+          messages: [...state.messages, action.payload.newMessage],
+        };
     default:
       return state;
   }

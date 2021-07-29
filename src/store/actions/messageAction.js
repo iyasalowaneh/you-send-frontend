@@ -15,19 +15,18 @@ export const fetchMessage = () => {
     }
   };
 };
-// export const addshop = (newShop) => {
-//   return async (dispatch) => {
-//     try {
-//       const formData = new FormData();
-//       for (const key in newShop) formData.append(key, newShop[key]);
+export const addMessage = (newMessage) => {
+  return async (dispatch) => {
+    try {
+      
 
-//       const res = await axios.post(`http://localhost:8080/shops/:shopId/shops/`, formData);
-//       dispatch({
-//         type: actionType.ADD_PRODUCT,
-//         payload: { newShop: res.data },
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+      const res = await axios.post(`http://localhost:8000/${newMessage.userId}/messageCreat/`, newMessage);
+      dispatch({
+        type: actionType.ADD_MESSAGE,
+        payload: { newMessage: res.data },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
