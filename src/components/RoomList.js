@@ -7,12 +7,15 @@ import "../ChatList.css";
 import "../Chat.css";
 import { useParams } from "react-router";
 import { createRoom } from "../store/actions/roomListActions";
+import ChatList from "./ChatList";
 
-const RoomList = () => {
+const RoomList = ({setUserId}) => {
   const users = useSelector((state) => state.userReducer.users);
   const rooms = useSelector((state) => state.rooms.rooms);
+  
+  
   const RoomListOne = users.map((user) => (
-    <RoomItem user={user} key={user.id} />
+    <RoomItem setUserId={setUserId}  user={user} key={user.id} />
   ));
 
 
@@ -80,7 +83,7 @@ const RoomList = () => {
                         type="text"
                         class="form-control"
                         id="formGroupExampleInput"
-                        placeholder="Enter the product name"
+                        placeholder="Enter the group name"
                         name="name"
                         onChange={handleChange}
                         value={room.name}
