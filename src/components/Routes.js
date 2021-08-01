@@ -17,16 +17,17 @@ function Routes(props) {
       {/* <Route  path="/:userId">
         <Profile />
       </Route> */}
+      <Route path="/rooms/:userSlug">
+        <ChatList />
+      </Route>
     <Route path="/combine">
         <Combine />
       </Route>
-      <Route path="/RoomList">
+      <Route path="/rooms">
         <RoomList />
       </Route>
 
-      <Route path="/rooms">
-        <ChatList />
-      </Route>
+      
       <Route path="/Verify">
         <Verify />
       </Route>

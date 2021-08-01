@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const RoomItem = (props) => {
   const user = props.user;
+  const setUserId=props.setUserId
   // const message = props.message;
 // console.log(message)
   return (<>
     <ui class="contacts">
-      <Link to="/rooms">
         <li class="active">
-          <div class="d-flex bd-highlight">
+          <div class="d-flex bd-highlight" onClick={()=>setUserId(user.id)} >
             <div class="avatar-icon">
               <img alt={user.name} src={user.image} />
             </div>
@@ -19,7 +19,6 @@ const RoomItem = (props) => {
             </div>
           </div>
         </li>
-      </Link>
     </ui>
 
 {/*  

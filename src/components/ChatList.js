@@ -5,15 +5,29 @@ import { useParams } from "react-router";
 import { addMessage } from "../store/actions/messageAction";
 import { useState } from "react";
 
-const ChatList = () => {
+const ChatList = ({userId}) => {
   const messages = useSelector((state) => state.messages.messages);
+  const users = useSelector((state) => state.userReducer.users);
+  //console.log(userId)
+  const user = useSelector((state) => state.users.user);
 
-  const ChatListOne = messages.map((message) => (
-    <ChatItem message={message} key={message.id} />
+// console.log(messages)
+
+
+  let userMessage=messages.filter((message)=>[userId,user.id].includes(message.senderId)&&[userId,user.id].includes(message.reciverId))
+  
+  // console.log(userMessage)
+  
+  
+  userMessage = userMessage.map((message) => (
+    message ? <ChatItem message={message} key={message.id} /> : ""
   ));
 
-console.log(messages)
+  const userName = users.filter((user)=>user.id===userId).map((user)=>user.name)
+  console.log(userName)
+// console.log(messages)
   const [message, SetMessage] = useState({
+    reciverId:userId,
     content: "",
   });
   const dispatch = useDispatch();
@@ -68,7 +82,7 @@ console.log(messages)
                           class="rounded-circle user_img"
                         />
                         <span class="online_icon"></span>
-                        <span>Chat with Ali </span>
+                        <span>Chat with {userName} </span>
                       </div>
                       <div class="video_cam">
                         <span>
@@ -110,7 +124,7 @@ console.log(messages)
                         <p class="msg_cotainer">ghj</p>
                       </div>
                     </div>
-                    {ChatListOne}
+                    {userMessage}
 
                   </div>
 
@@ -137,6 +151,7 @@ console.log(messages)
           </div>
  
      </>
+      
   );
 };
 export default ChatList;

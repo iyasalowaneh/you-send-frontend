@@ -24,7 +24,7 @@ export const signin = (userData, history) => {
       console.log(res.data.token);
 
       dispatch(setUser(res.data.token));
-      history.push("/rooms");
+      history.push("/combine");
     } catch (error) {
       console.log(error);
     }
