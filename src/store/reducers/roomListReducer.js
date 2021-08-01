@@ -15,6 +15,7 @@ const roomListReducer = (state = initialState, action) => {
         rooms: action.payload.rooms,
       };
       case types.ADD_ROOM:
+
         return {
           ...state,
           rooms: [...state.rooms, action.payload.newRoom],

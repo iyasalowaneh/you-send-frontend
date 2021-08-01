@@ -11,7 +11,7 @@ const RoomItem = (props) => {
         <li class="active">
           <div class="d-flex bd-highlight" onClick={()=>setUserId(user.id)} >
             <div class="avatar-icon">
-              <img alt={user.name} src={user.image} />
+              <img  src={user.image} />
             </div>
             <div class="user_info">
               <span>{user.name}</span>

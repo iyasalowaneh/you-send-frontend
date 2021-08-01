@@ -20,7 +20,8 @@ export const fetchRoom = () => {
 
 export const createRoom = (newRoom) => {
   return async (dispatch) => {
-    try {
+    try {   
+
       const res = await instance.post(`/rooms`, newRoom);
       dispatch({
         type: actionTypes.ADD_ROOM,
