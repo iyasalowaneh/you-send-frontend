@@ -3,7 +3,6 @@ import decode from "jwt-decode";
 import * as actionTypes from "./types";
 import instance from "./instance";
 
-
 export const signup = (userData, history) => {
   return async (dispatch) => {
     try {
@@ -14,8 +13,6 @@ export const signup = (userData, history) => {
     }
   };
 };
-
-
 
 export const signin = (userData, history) => {
   return async (dispatch) => {
@@ -73,8 +70,8 @@ export const updateUser = (updateUser) => {
     try {
       const formData = new FormData();
       for (const key in updateUser) formData.append(key, updateUser[key]);
-
       const res = await instance.put(
+        // REVIEW: Remove baseURL
         `http://localhost:8000/users/${updateUser.id}`,
         formData
       );

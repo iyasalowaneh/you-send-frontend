@@ -1,6 +1,7 @@
 import * as types from "../actions/types";
 
 const initialState = {
+  // REVIEW: why not null?
   user: [],
 };
 
@@ -11,7 +12,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-
 
     case types.UPDATE_USER:
       const { updateUsers } = action.payload;

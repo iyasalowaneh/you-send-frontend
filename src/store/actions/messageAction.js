@@ -1,7 +1,9 @@
 import axios from "axios";
-import * as actionType from "./types"
+import * as actionType from "./types";
 import instance from "./instance";
 
+// REVIEW: fetchMessage means you're fetching one message only.
+// Change it to fetchMessages, the type as well.
 export const fetchMessage = () => {
   return async (dispatch) => {
     try {
@@ -12,7 +14,7 @@ export const fetchMessage = () => {
         payload: { messages: res.data },
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 };

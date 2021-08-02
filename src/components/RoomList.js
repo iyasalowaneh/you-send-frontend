@@ -1,18 +1,25 @@
+import { useState } from "react";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+
+// Components
+import ChatList from "./ChatList";
 import RoomItem from "./RoomItem";
 import GroupChatItem from "./GroupChatItem";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+// Actions
 import { fetchUser } from "../store/actions/authActions";
+import { createRoom } from "../store/actions/roomListActions";
+
+// Styling
 import "../ChatList.css";
 import "../Chat.css";
-import { useParams } from "react-router";
-import { createRoom } from "../store/actions/roomListActions";
-import ChatList from "./ChatList";
 
 const RoomList = ({ setUserId }) => {
   const users = useSelector((state) => state.userReducer.users);
   const rooms = useSelector((state) => state.rooms.rooms);
 
+  // REVIEW: roomListOne because it's an array
   const RoomListOne = users.map((user) => (
     <RoomItem setUserId={setUserId} user={user} key={user.id} />
   ));
@@ -39,6 +46,7 @@ const RoomList = ({ setUserId }) => {
     dispatch(createRoom(room));
   };
 
+  // REVIEW: what is userCho?
   const [userCho, setUserCho] = useState([]);
 
   const handleChangeOne = (event) => {
@@ -47,6 +55,7 @@ const RoomList = ({ setUserId }) => {
     setUserCho([...userCho, +event.target.value]);
   };
   return (
+    // REVIEW: Remove commented out code
     // <>
     //   <head>
     //     <title>Chat</title>
@@ -123,31 +132,29 @@ const RoomList = ({ setUserId }) => {
     //   </div>
     // </>
     <form onSubmit={handleSubmit}>
-    <div class="mb-0">
-      <label
-        for="formGroupExampleInput"
-        class="form-label"
-      ></label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput"
-        placeholder="Enter the group name"
-        name="name"
-        onChange={handleChange}
-        value={room.name}
-      />
-    </div>{" "}
-    <select
-      onChange={handleChangeOne}
-      class="aria-select"
-      multiple
-      aria-label="multiple select example"
-    >
-      {foundUsers}
-    </select>
-    <button type="submit"> Submit</button>
-  </form> );
+      <div class="mb-0">
+        <label for="formGroupExampleInput" class="form-label"></label>
+        <input
+          type="text"
+          class="form-control"
+          id="formGroupExampleInput"
+          placeholder="Enter the group name"
+          name="name"
+          onChange={handleChange}
+          value={room.name}
+        />
+      </div>{" "}
+      <select
+        onChange={handleChangeOne}
+        class="aria-select"
+        multiple
+        aria-label="multiple select example"
+      >
+        {foundUsers}
+      </select>
+      <button type="submit"> Submit</button>
+    </form>
+  );
 };
 
 export default RoomList;

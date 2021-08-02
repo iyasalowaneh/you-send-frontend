@@ -7,15 +7,10 @@ import { useHistory } from "react-router-dom";
 //actions
 import { signin } from "../store/actions/authActions";
 const Signin = () => {
-
   const [user, SetUser] = useState({
-
-        username: "",
-        password: "",
-    
-
-    }
-  );
+    username: "",
+    password: "",
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   const handleChange = (event) => {
@@ -23,15 +18,14 @@ const Signin = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-     dispatch(signin(user,history));
-    
+    dispatch(signin(user, history));
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">
-          PHONENUMBER 
+          PHONENUMBER
         </label>
         <input
           type="text"
@@ -43,10 +37,10 @@ const Signin = () => {
           value={user.username}
         />
       </div>
-    
+
       <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">
-          User password 
+          User password
         </label>
         <input
           type="text"
@@ -58,8 +52,8 @@ const Signin = () => {
           value={user.password}
         />
       </div>
-     
-      <button type="submit">{ "Submit"}</button>
+      {/* REVIEW: If it's a string, you don't need the {} and "" */}
+      <button type="submit">{"Submit"}</button>
     </form>
   );
 };

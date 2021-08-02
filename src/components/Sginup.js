@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import { signup } from "../store/actions/authActions";
 //import { updateUser } from "../store/actions/userActions";
 const Signup = () => {
+  // REVIEW: Remove commented out code
+  // REVIEW: Fix file name
   //   const users = useSelector((state) => state.users.users);
   //   const updatedUser = users.find(
   // (user) => user.slug === userSlug
@@ -27,6 +29,7 @@ const Signup = () => {
   };
 
   return (
+    // REVIEW: Remove fragments
     <>
       <div class="container">
         <div class="d-flex justify-content-center h-100">
