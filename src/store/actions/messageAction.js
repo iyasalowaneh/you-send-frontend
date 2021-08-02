@@ -29,3 +29,17 @@ export const addMessage = (newMessage) => {
     }
   };
 };
+
+export const addMessagetoGroup = (newMessage,roomId) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.post(`rooms/${roomId}/messageCreat`, newMessage);
+      dispatch({
+        type: actionType.ADD_MESSAGE_GROUP,
+        payload: { newMessage: res.data },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

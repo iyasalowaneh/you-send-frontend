@@ -2,13 +2,19 @@ import "../ChatList.css";
 
 const GroupRoomItem = ({room,setRoomId,setUserId}) => {
 
+const x =()=>{
+  setRoomId(room.id)
+  setUserId(null)
+}
+
+
   return (
 
 
     <>
       <ui class="contacts">
           <li class="active">
-          <div class="d-flex bd-highlight" onClick={() => setRoomId(room.id)}>
+          <div class="d-flex bd-highlight" onClick={x}>
               {/* <div class="avatar-icon">
               <img alt={room.name} src={user.image} />
             </div> */}

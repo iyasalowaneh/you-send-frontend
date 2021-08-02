@@ -21,7 +21,6 @@ export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post(`/signin`, userData);
-      console.log(res.data.token);
 
       dispatch(setUser(res.data.token));
       history.push("/combine");
@@ -69,7 +68,6 @@ const setUser = (token) => {
 };
 export const updateUser = (updateUser) => {
   return async (dispatch) => {
-    console.log(updateUser);
     try {
       const formData = new FormData();
       for (const key in updateUser) formData.append(key, updateUser[key]);

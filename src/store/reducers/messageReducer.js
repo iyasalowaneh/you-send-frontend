@@ -16,6 +16,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           messages: [...state.messages, action.payload.newMessage],
         };
+        case actionType.ADD_MESSAGE_GROUP:
+        return {
+          ...state,
+          messages: [...state.messages, action.payload.newMessage],
+        };
     default:
       return state;
   }

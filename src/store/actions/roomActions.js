@@ -7,7 +7,6 @@ export const fetchUser = () => {
     try {
       console.log("action");
       const res = await instance.get("/users");
-      // console.log(res.data)
       dispatch({
         type: actionTypes.FETCH_USER,
 

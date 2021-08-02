@@ -7,14 +7,15 @@ const Combine = (props) => {
 
   const [userId,setUserId]=useState(null)
   const [roomId,setRoomId]=useState(null)
-
-console.log(userId)
+const[desplay,setDesplay]=useState(null)
   return (
     <DivTow>
       <RoomList setRoomId={setRoomId} setUserId={setUserId} />
 
       {userId&&<ChatList userId={userId}/>}
+      
       {roomId&&<ChatList roomId={roomId}/>}
+      
     </DivTow>
   );
 };
