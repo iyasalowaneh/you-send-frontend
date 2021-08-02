@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../store/actions/messageAction";
 import { useState } from "react";
 import GroupChatItem from "./GroupChatItem";
-
+import { addMessagetoGroup } from "../store/actions/messageAction";
 const ChatList = ({ userId, roomId }) => {
   const messages = useSelector((state) => state.messages.messages);
   const rooms = useSelector((state) => state.rooms.rooms);
@@ -16,17 +16,23 @@ const ChatList = ({ userId, roomId }) => {
       [userId, user.id].includes(message.senderId) &&
       [userId, user.id].includes(message.reciverId)
   );
-  let roomMessage = messages.filter(
-    (message) =>
-      [roomId, rooms.id].includes(message.senderId) &&
-      [roomId, rooms.id].includes(message.reciverId)
-  );
+  
   userMessage = userMessage.map((message) =>
     message ? <ChatItem message={message} key={message.id} /> : ""
   );
-  roomMessage = roomMessage.map((message) =>
-    message ? <GroupChatItem message={message} key={message.id} /> : ""
-  );
+ 
+  let roomMessage = (roomId)=>{ return messages.filter(
+    (message) =>message.roomId===roomId
+     
+  )}
+  const room = rooms.find((room) => room.id === roomId);
+  let groupMessages = roomMessage(room?.id)
+
+
+   roomMessage = groupMessages.map((message) =>
+  message ? <GroupChatItem message={message} key={message.id} /> : ""
+);
+
 
   const userName = users
     .filter((user) => user.id === userId)
@@ -45,7 +51,13 @@ const ChatList = ({ userId, roomId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(addMessage(message));
+     dispatch(addMessage(message))
+  };
+
+  const handleSubmit2 = (event) => {
+    event.preventDefault();
+
+    dispatch(addMessagetoGroup(message ,roomId))
   };
 
   return (
@@ -138,7 +150,25 @@ const ChatList = ({ userId, roomId }) => {
               <div class="card-footer">
                 <div class="input-group">
                   <i class="fas fa-paperclip"></i>
-                  <form onSubmit={handleSubmit}>
+
+
+
+                  { userId > 0 && <form onSubmit={handleSubmit}>
+                  <textarea
+                    onChange={handleChange}
+                    name="content"
+                    value={message.content}
+                    class="form-control type_msg"
+                    placeholder="Type your message..."
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="fas fa-location-arrow"
+                  ></button>
+                </form>
+                   }
+
+                  {roomId >0  &&   <form onSubmit={handleSubmit2}>
                     <textarea
                       onChange={handleChange}
                       name="content"
@@ -150,7 +180,12 @@ const ChatList = ({ userId, roomId }) => {
                       type="submit"
                       class="fas fa-location-arrow"
                     ></button>
-                  </form>
+                  </form>}
+ 
+
+               
+                 
+                  
                 </div>
               </div>
             </div>

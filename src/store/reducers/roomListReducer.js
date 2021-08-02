@@ -9,7 +9,6 @@ const roomListReducer = (state = initialState, action) => {
    
 
     case types.FETCH_ROOM:
-      console.log(action.payload)
       return {
         ...state,
         rooms: action.payload.rooms,

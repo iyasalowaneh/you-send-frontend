@@ -1,13 +1,16 @@
 import "../ChatList.css";
 
 const RoomItem = ({setUserId,user,setRoomId}) => {
- 
+  const y =()=>{
+    setRoomId(null)
+    setUserId(user.id)
+  }
 
   return (
     <>
       <ui class="contacts">
         <li class="active">
-          <div class="d-flex bd-highlight" onClick={() =>setUserId(user.id)}>
+          <div class="d-flex bd-highlight" onClick={y}>
             <div class="avatar-icon">
               <img src={user.image} />
             </div>
@@ -15,6 +18,7 @@ const RoomItem = ({setUserId,user,setRoomId}) => {
               <span>{user.name}</span>
               <p>{user.status}</p>
             </div>
+            
           </div>
         </li>
       </ui>

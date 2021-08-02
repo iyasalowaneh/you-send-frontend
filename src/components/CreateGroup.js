@@ -33,7 +33,6 @@ const CreateGroup = () => {
   };
 
   const handleChangeOne = (event) => {
-    console.log(event.target.value);
     setUser([...user, +event.target.value]);
   };
   return (
