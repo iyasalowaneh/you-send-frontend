@@ -17,12 +17,12 @@ export const fetchRoom = () => {
   };
 };
 
-
-export const createRoom = (newRoom) => {
+export const createRoom = (newRoom, users) => {
   return async (dispatch) => {
-    try {   
-
-      const res = await instance.post(`/rooms`, newRoom);
+    try {
+      newRoom.users = users;
+      console.log(newRoom.users);
+      const res = await instance.post("/rooms", newRoom);
       dispatch({
         type: actionTypes.ADD_ROOM,
         payload: { newRoom: res.data },

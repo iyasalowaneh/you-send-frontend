@@ -1,17 +1,15 @@
 import "../ChatList.css";
-import { Link } from "react-router-dom";
 
-const RoomItem = (props) => {
-  const user = props.user;
-  const setUserId=props.setUserId
-  // const message = props.message;
-// console.log(message)
-  return (<>
-    <ui class="contacts">
+const RoomItem = ({setUserId,user,setRoomId}) => {
+ 
+
+  return (
+    <>
+      <ui class="contacts">
         <li class="active">
-          <div class="d-flex bd-highlight" onClick={()=>setUserId(user.id)} >
+          <div class="d-flex bd-highlight" onClick={() =>setUserId(user.id)}>
             <div class="avatar-icon">
-              <img  src={user.image} />
+              <img src={user.image} />
             </div>
             <div class="user_info">
               <span>{user.name}</span>
@@ -19,9 +17,9 @@ const RoomItem = (props) => {
             </div>
           </div>
         </li>
-    </ui>
+      </ui>
 
-{/*  
+      {/*  
 <div class="d-flex justify-content-end mb-4">
 <p class="msg_cotainer_send">
 {user.name}
@@ -32,11 +30,7 @@ const RoomItem = (props) => {
   src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
 />
 </div> */}
-
-
- </>  
-
-
+    </>
   );
 };
 

@@ -12,10 +12,7 @@ const Signup = () => {
 
 const users = useSelector((state) => state.users.users);
 
-console.log(users)
-//    const updatedUser = users.find(
-//     (user) => user.slug === userSlug
-//   );
+
   const [user, SetUser] = useState({
     id:"",
     firstName: "",

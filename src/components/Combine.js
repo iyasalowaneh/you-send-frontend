@@ -1,18 +1,20 @@
 import RoomList from "./RoomList";
 import ChatList from "./ChatList";
-import { DivOne, DivTow } from "../Styles";
+import { DivTow } from "../Styles";
 import { useState } from "react";
 
 const Combine = (props) => {
 
-const [userId,setUserId]=useState(null)
+  const [userId,setUserId]=useState(null)
+  const [roomId,setRoomId]=useState(null)
 
 console.log(userId)
   return (
     <DivTow>
-      <RoomList setUserId={setUserId} />
+      <RoomList setRoomId={setRoomId} setUserId={setUserId} />
 
       {userId&&<ChatList userId={userId}/>}
+      {roomId&&<ChatList roomId={roomId}/>}
     </DivTow>
   );
 };

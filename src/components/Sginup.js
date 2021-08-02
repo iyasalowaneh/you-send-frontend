@@ -1,17 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import "../App.css";
 import { useHistory } from "react-router-dom";
 //actions
 import { signup } from "../store/actions/authActions";
-//import { updateUser } from "../store/actions/userActions";
 const Signup = () => {
-  //   const users = useSelector((state) => state.users.users);
-  //   const updatedUser = users.find(
-  // (user) => user.slug === userSlug
-  //);
+ 
   const [user, SetUser] = useState({
     name: "",
     phonenumber: "",

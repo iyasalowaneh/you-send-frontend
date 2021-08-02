@@ -1,33 +1,22 @@
-import "../ChatList.css";
-import { Link } from "react-router-dom";
+import "../Chat.css";
 
-const RoomItem = (props) => {
-  const room = props.room;
-  // const message = props.message;
-// console.log(message)
-  return (<>
-    <ui class="contacts">
-      <Link to="/rooms">
-        <li class="active">
-          <div class="d-flex bd-highlight">
-            {/* <div class="avatar-icon">
-              <img alt={room.name} src={user.image} />
-            </div> */}
-            <div class="user_info">
-              <span>{room.name}</span>
-            </div>
-          </div>
-        </li>
-      </Link>
-    </ui>
+const GroupChatItem = (props) => {
+  const message = props.message;
 
+  return (
+    <div class="d-flex justify-content-end mb-4">
+      <p class="msg_cotainer_send">
+        {message.content}
 
-
-
- </>  
-
-
+        <p class="msg_time_send">8:55 AM, Today</p>
+      </p>
+      <img src={message.image} />
+      <img
+        class="rounded-circle user_img_msg"
+        src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+      />
+    </div>
   );
 };
 
-export default RoomItem;
+export default GroupChatItem;
