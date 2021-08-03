@@ -17,3 +17,37 @@ export const fetchUser = () => {
     }
   };
 };
+
+
+
+
+
+
+
+
+
+export const updateUser = (updateUser) => {
+  return async (dispatch) => {
+    console.log(updateUser);
+    try {
+      const formData = new FormData();
+      for (const key in updateUser)
+        formData.append(key, updateUser[key]);
+
+      const res = await axios.put(
+        `http://localhost:8080/${updateUser.id}`,
+        formData
+      );
+      dispatch({
+        type: actionTypes.UPDATE_USER,
+        payload: { updateUser: res.data },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+
+

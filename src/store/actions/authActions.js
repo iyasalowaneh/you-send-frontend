@@ -3,19 +3,19 @@ import decode from "jwt-decode";
 import * as actionTypes from "./types";
 import instance from "./instance";
 
-
 export const signup = (userData, history) => {
   return async (dispatch) => {
     try {
-      const res = await instance.post(`/signup`, userData);
+      const formData = new FormData();
+      for (const key in userData) formData.append(key, userData[key]);
+
+      const res = await instance.post(`/signup`, formData);
       history.push("/Verify");
     } catch (error) {
       console.log(error);
     }
   };
 };
-
-
 
 export const signin = (userData, history) => {
   return async (dispatch) => {

@@ -20,6 +20,9 @@ export const fetchRoom = () => {
 export const createRoom = (newRoom, users) => {
   return async (dispatch) => {
     try {
+      // const formData = new FormData();
+      // for (const key in newRoom) formData.append(key, newRoom[key]);
+
       newRoom.users = users;
       const res = await instance.post("/rooms", newRoom);
       dispatch({
