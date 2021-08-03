@@ -23,6 +23,14 @@ const roomReducer = (state = initialState, action) => {
           user.id === updateUsers.id ? updateUsers : user
         ),
       };
+      case types.DELETE_USER:
+      const usersToKeep = state.users.filter(
+        (user) => user.id !== action.payload.userId
+      );
+      return {
+        ...state,
+        users: usersToKeep,
+      };
     default:
       return state;
   }

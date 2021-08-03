@@ -27,7 +27,7 @@ const ChatList = ({ userId, roomId }) => {
     .map((room) => room.image);
   userMessage = userMessage.map((message) =>
     message ? (
-      <ChatItem userImage={userImage} message={message} key={message.id} />
+      <ChatItem userImage={userImage} message={message} key={message.id} user={user} key={user.id} />
     ) : (
       ""
     )
@@ -52,6 +52,7 @@ const ChatList = ({ userId, roomId }) => {
   const [message, SetMessage] = useState({
     reciverId: userId,
     content: "",
+    image:""
   });
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -67,6 +68,10 @@ const ChatList = ({ userId, roomId }) => {
     event.preventDefault();
 
     dispatch(addMessagetoGroup(message, roomId));
+  };
+
+  const handleImage = (event) => {
+    SetMessage({ ...message, image: event.target.files[0] });
   };
 
   return (
@@ -154,7 +159,10 @@ const ChatList = ({ userId, roomId }) => {
 
               <div class="card-footer">
                 <div class="input-group">
-                  <i class="fas fa-paperclip"></i>
+                 <i class="fas fa-paperclip">
+                  <input   type="file"
+                    name="image"
+                    onChange={handleImage}  ></input></i>
 
                   {userId > 0 && (
                     <form onSubmit={handleSubmit}>

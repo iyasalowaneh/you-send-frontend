@@ -19,7 +19,10 @@ export const fetchMessage = () => {
 export const addMessage = (newMessage) => {
   return async (dispatch) => {
     try {
-      const res = await instance.post("/messageCreat", newMessage);
+      const formData = new FormData();
+      for (const key in newMessage) formData.append(key, newMessage[key]);
+
+      const res = await instance.post("/messageCreat", formData);
       dispatch({
         type: actionType.ADD_MESSAGE,
         payload: { newMessage: res.data },

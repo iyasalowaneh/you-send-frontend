@@ -5,7 +5,6 @@ import instance from "./instance";
 export const fetchUser = () => {
   return async (dispatch) => {
     try {
-      console.log("action");
       const res = await instance.get("/users");
       dispatch({
         type: actionTypes.FETCH_USER,
@@ -20,15 +19,8 @@ export const fetchUser = () => {
 
 
 
-
-
-
-
-
-
 export const updateUser = (updateUser) => {
   return async (dispatch) => {
-    console.log(updateUser);
     try {
       const formData = new FormData();
       for (const key in updateUser)
@@ -51,3 +43,16 @@ export const updateUser = (updateUser) => {
 
 
 
+export const deleteUser = (userId) => {
+  return async (dispatch) => {
+    try {
+      await instance.delete(`/${userId}`);
+      dispatch({
+        type: actionTypes.DELETE_USER,
+        payload: { userId: userId },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

@@ -1,6 +1,7 @@
 import "../ChatList.css";
+import DeleteUser from "./DeleteUser"
 
-const RoomItem = ({setUserId,user,setRoomId}) => {
+const RoomItem = ({setUserId,user,setRoomId, props}) => {
   const y =()=>{
     setRoomId(null)
     setUserId(user.id)
@@ -18,6 +19,9 @@ const RoomItem = ({setUserId,user,setRoomId}) => {
               <span>{user.name}</span>
               <p>{user.status}</p>
             </div>
+            <DeleteUser
+          userId={user.id}
+        />
             
           </div>
         </li>
