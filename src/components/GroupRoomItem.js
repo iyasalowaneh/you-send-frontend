@@ -1,29 +1,40 @@
+import { useReducer } from "react";
+import { useSelector } from "react-redux";
 import "../ChatList.css";
+import DeleteRooms from "./DeleteRooms";
+const GroupRoomItem = ({ room, user, setRoomId, setUserId }) => {
+  const rooms = useSelector((state) => state.rooms.rooms);
+  const x = () => {
+    setRoomId(room.id);
+    setUserId(null);
+  };
 
-const GroupRoomItem = ({room,setRoomId,setUserId}) => {
+  const s = rooms
+    .flat()
+    .map((room) => room.Users.map((_user) => _user.id))
+    .flat();
+  const v = s.flat().map((n)=>n===user.id)
 
-const x =()=>{
-  setRoomId(room.id)
-  setUserId(null)
-}
-
-
+  console.log(v);
   return (
-
-
     <>
-      <ui class="contacts">
+      {v ? (
+        <ui class="contacts">
           <li class="active">
-          <div class="d-flex bd-highlight" onClick={x}>
+            <div class="d-flex bd-highlight" onClick={x}>
               <div class="avatar-icon">
-              <img alt={room.name} src={room.image} />
-            </div>
+                <img alt={room.name} src={room.image} />
+              </div>
               <div class="user_info">
                 <span>{room.name}</span>
-              </div>
+              </div>{" "}
+              <DeleteRooms roomId={room.id} />
             </div>
           </li>
-      </ui>
+        </ui>
+      ) : (
+        ""
+      )}
     </>
   );
 };

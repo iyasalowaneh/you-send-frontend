@@ -6,16 +6,14 @@ const initialState = {
 
 const roomReducer = (state = initialState, action) => {
   switch (action.type) {
-   
-
     case types.FETCH_USER:
       return {
         ...state,
         users: action.payload.users,
       };
 
-      case types.UPDATE_USER:
-      const { updateUsers } = action.payload;
+    case types.UPDATE_USER:
+      const updateUsers = action.payload;
 
       return {
         ...state,
@@ -23,7 +21,7 @@ const roomReducer = (state = initialState, action) => {
           user.id === updateUsers.id ? updateUsers : user
         ),
       };
-      case types.DELETE_USER:
+    case types.DELETE_USER:
       const usersToKeep = state.users.filter(
         (user) => user.id !== action.payload.userId
       );
