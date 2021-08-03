@@ -1,19 +1,42 @@
 import RoomItem from "./RoomItem";
 import GroupRoomItem from "./GroupRoomItem";
+import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
 import "../ChatList.css";
 import "../Chat.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const RoomList = ({ setUserId,setRoomId }) => {
+const RoomList = ({ setUserId, setRoomId }) => {
   const users = useSelector((state) => state.userReducer.users);
+  const user = useSelector((state) => state.users.user);
   const rooms = useSelector((state) => state.rooms.rooms);
-  const RoomListOne = users.map((user) => (
-    <RoomItem    setRoomId={setRoomId} setUserId={setUserId} user={user} key={user.id} />
-  ));
-  const roomLi = rooms.map((room) => (
-    <GroupRoomItem setUserId={setUserId}  setRoomId={setRoomId} room={room} key={room.id} />
-  ));
+  const [query, setQuery] = useState("");
+  const RoomListOne = users
+    .filter((user) => user.name.includes(query.toLowerCase()))
+    .filter((userOn) => userOn.id !== user.id)
+    .map((user) => (
+      <RoomItem
+        setRoomId={setRoomId}
+        setUserId={setUserId}
+        user={user}
+        rooms={rooms}
+        key={user.id}
+      />
+    ));
+  const s = rooms;
+
+  const roomLi = rooms
+    .filter((room) => room.name.includes(query.toLowerCase()))
+    .map((room) => (
+      <GroupRoomItem
+        setUserId={setUserId}
+        setRoomId={setRoomId}
+        room={room}
+        user={user}
+        key={room.id}
+      />
+    ));
 
   return (
     <>
@@ -42,28 +65,25 @@ const RoomList = ({ setUserId,setRoomId }) => {
           src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
         />
       </head>
+
       <div>
-        <div class="container-fluid h-100">
-          <div class="row justify-content-left h-100">
-            <div>
-              <div class="card mb-sm-1 mb-md-0 contacts_card">
-                {" "}
-                <Link to="/createGroups">
-                  <i class="fas fa-users"></i>{" "}
-                </Link>{" "}
-                <div class="card-header">
-                  <input type="text" placeholder="Search..." />
-                  <button type="button" class="btn btn-primary">
-                    <i class="fas fa-search"></i>
-                  </button>{" "}
-                  <div class="card-body contacts_body">
-                    <ui class="contacts">
-                      {RoomListOne}
-                      group {roomLi}
-                    </ui>
-                  </div>
-                </div>
-              </div>
+        <div class="card mb-sm-2 mb-md-2 contacts_card">
+          <p> hellooo {user.name}</p>
+          <Link to="userUpdate">update profile </Link>
+          <Link to="/createGroups">
+            <i class="fas fa-users"></i>{" "}
+          </Link>{" "}
+          <div class="card-header">
+            {" "}
+            <SearchBar placeholder="Search..." setQuery={setQuery} />
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>{" "}
+            <div class="card-body contacts_body">
+              <ui class="contacts">
+                {RoomListOne}
+                group {roomLi}
+              </ui>
             </div>
           </div>
         </div>

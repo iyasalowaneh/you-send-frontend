@@ -66,22 +66,3 @@ const setUser = (token) => {
     };
   }
 };
-export const updateUser = (updateUser) => {
-  return async (dispatch) => {
-    try {
-      const formData = new FormData();
-      for (const key in updateUser) formData.append(key, updateUser[key]);
-
-      const res = await instance.put(
-        `http://localhost:8000/users/${updateUser.id}`,
-        formData
-      );
-      dispatch({
-        type: actionTypes.UPDATE_USER,
-        payload: { updateUsers: res.data },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};

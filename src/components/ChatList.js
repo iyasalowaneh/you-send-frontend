@@ -27,7 +27,13 @@ const ChatList = ({ userId, roomId }) => {
     .map((room) => room.image);
   userMessage = userMessage.map((message) =>
     message ? (
-      <ChatItem userImage={userImage} message={message} key={message.id} user={user} key={user.id} />
+      <ChatItem
+        userImage={userImage}
+        message={message}
+        key={message.id}
+        user={user}
+        key={user.id}
+      />
     ) : (
       ""
     )
@@ -52,7 +58,7 @@ const ChatList = ({ userId, roomId }) => {
   const [message, SetMessage] = useState({
     reciverId: userId,
     content: "",
-    image:""
+    image: "",
   });
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -102,102 +108,63 @@ const ChatList = ({ userId, roomId }) => {
         />
       </head>
 
-      <div class="container-fluid h-100">
-        <div class="row justify-left ">
-          <div class="col-md-1 col-xl-1 chat"></div>
-          <div class="col-md-4 col-xl-11 chat">
-            <div class="card">
-              <div class="card-header msg_head">
-                <div class="d-flex bd-highlight">
-                  <div class="heading-avatar-icon">
-                    {room && (
-                      <img src={groupImage} class="rounded-circle user_img" />
-                    )}
-                    {!room && (
-                      <img src={userImage} class="rounded-circle user_img" />
-                    )}
+      <div class="col-md-2 col-xl-8 chat">
+        <div class="card">
+          <div class="card-header msg_head">
+            <div class="d-flex bd-highlight">
+              <div class="heading-avatar-icon">
+                {room && (
+                  <img src={groupImage} class="rounded-circle user_img" />
+                )}
+                {!room && (
+                  <img src={userImage} class="rounded-circle user_img" />
+                )}
 
-                    <span>
-                      Chat with {userName} {groupName}
-                    </span>
-                  </div>
-                  <div class="video_cam">
-                    <span>
-                      <i class="fas fa-video"></i>
-                    </span>
-                    <span>
-                      <i class="fas fa-phone"></i>
-                    </span>
-                  </div>
-                </div>
-                <span id="action_menu_btn">
-                  <i class="fas fa-ellipsis-v"></i>
+                <span>
+                  Chat with {userName} {groupName}
                 </span>
-                <div class="action_menu">
-                  <ul>
-                    <li>
-                      <i class="fas fa-user-circle"></i> View profile
-                    </li>
-                    <li>
-                      <i class="fas fa-users"></i> Add to close friends
-                    </li>
-                    <li>
-                      <i class="fas fa-plus"></i> Add to group
-                    </li>
-                    <li>
-                      <i class="fas fa-ban"></i> Block
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="card-body msg_card_body">
-                <div class="d-flex justify-content-start mb-4"></div>
-                {userMessage}
-                {roomMessage}
-              </div>
-
-              <div class="card-footer">
-                <div class="input-group">
-                 <i class="fas fa-paperclip">
-                  <input   type="file"
-                    name="image"
-                    onChange={handleImage}  ></input></i>
-
-                  {userId > 0 && (
-                    <form onSubmit={handleSubmit}>
-                      <textarea
-                        onChange={handleChange}
-                        name="content"
-                        value={message.content}
-                        class="form-control type_msg"
-                        placeholder="Type your message..."
-                      ></textarea>
-                      <button
-                        type="submit"
-                        class="fas fa-location-arrow"
-                      ></button>
-                    </form>
-                  )}
-
-                  {roomId > 0 && (
-                    <form onSubmit={handleSubmit2}>
-                      <textarea
-                        onChange={handleChange}
-                        name="content"
-                        value={message.content}
-                        class="form-control type_msg"
-                        placeholder="Type your message..."
-                      ></textarea>
-                      <button
-                        type="submit"
-                        class="fas fa-location-arrow"
-                      ></button>
-                    </form>
-                  )}
-                </div>
               </div>
             </div>
+          </div>
+
+          <div class="card-body msg_card_body">
+            <div class="d-flex justify-content-start mb-4"></div>
+            {userMessage}
+            {roomMessage}
+          </div>
+
+          <div class="card-footer">
+            <input type="file" name="image" onChange={handleImage}></input>
+
+            {userId > 0 && (
+              <form onSubmit={handleSubmit}>
+                <button type="submit" class="fas fa-location-arrow"></button>
+                <textarea
+                  onChange={handleChange}
+                  name="content"
+                  value={message.content}
+                  class="form-control type_msg"
+                  placeholder="Type your message..."
+                >
+                  {" "}
+                </textarea>
+              </form>
+            )}
+
+            {roomId > 0 && (
+              <form onSubmit={handleSubmit2}>
+                <button type="submit" class="fas fa-location-arrow"></button>
+                <textarea
+                  onChange={handleChange}
+                  name="content"
+                  value={message.content}
+                  class="form-control type_msg"
+                  placeholder="Type your message..."
+                >
+                  {" "}
+                </textarea>
+              </form>
+            )}
           </div>
         </div>
       </div>

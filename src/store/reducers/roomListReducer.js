@@ -19,7 +19,14 @@ const roomListReducer = (state = initialState, action) => {
           ...state,
           rooms: [...state.rooms, action.payload.newRoom],
         };
-    
+        case types.DELETE_ROOM:
+      const roomsToKeep = state.users.filter(
+        (room) => room.id !== action.payload.roomId
+      );
+      return {
+        ...state,
+        rooms: roomsToKeep,
+      };
     default:
       return state;
   }

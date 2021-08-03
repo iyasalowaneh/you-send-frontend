@@ -17,31 +17,23 @@ export const fetchUser = () => {
   };
 };
 
-
-
-export const updateUser = (updateUser) => {
+export const updateUsers = (updateUser, history) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-      for (const key in updateUser)
-        formData.append(key, updateUser[key]);
+      for (const key in updateUser) formData.append(key, updateUser[key]);
 
-      const res = await axios.put(
-        `http://localhost:8080/${updateUser.id}`,
-        formData
-      );
+      const res = await instance.put("/userUpdate", formData);
+      history.push("/combine");
       dispatch({
         type: actionTypes.UPDATE_USER,
-        payload: { updateUser: res.data },
+        payload: res.data,
       });
     } catch (error) {
       console.log(error);
     }
   };
 };
-
-
-
 
 export const deleteUser = (userId) => {
   return async (dispatch) => {

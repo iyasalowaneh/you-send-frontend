@@ -1,15 +1,16 @@
 import "../ChatList.css";
-import DeleteUser from "./DeleteUser"
+import DeleteUser from "./DeleteUser";
+import UserUpdate from "./userUpdate";
 
-const RoomItem = ({setUserId,user,setRoomId, props}) => {
-  const y =()=>{
-    setRoomId(null)
-    setUserId(user.id)
-  }
+const RoomItem = ({ setUserId, user, setRoomId   }) => {
+  const y = () => {
+    setRoomId(null);
+    setUserId(user.id);
+  };
 
   return (
     <>
-      <ui class="contacts">
+ <ui class="contacts">
         <li class="active">
           <div class="d-flex bd-highlight" onClick={y}>
             <div class="avatar-icon">
@@ -18,11 +19,8 @@ const RoomItem = ({setUserId,user,setRoomId, props}) => {
             <div class="user_info">
               <span>{user.name}</span>
               <p>{user.status}</p>
-            </div>
-            <DeleteUser
-          userId={user.id}
-        />
-            
+            </div>{" "}
+            <DeleteUser userId={user.id} />
           </div>
         </li>
       </ui>

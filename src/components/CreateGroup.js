@@ -2,8 +2,10 @@ import GroupRoomItem from "./GroupRoomItem";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoom } from "../store/actions/roomListActions";
+import { useHistory } from "react-router-dom";
 
 const CreateGroup = () => {
+  const history = useHistory();
   const users = useSelector((state) => state.userReducer.users);
   const rooms = useSelector((state) => state.rooms.rooms);
 
@@ -29,7 +31,7 @@ const CreateGroup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createRoom(room, user));
+    dispatch(createRoom(room, user,history));
   };
   const handleImage = (event) => {
     setRoom({ ...room, image: event.target.files[0] });
@@ -54,13 +56,11 @@ const CreateGroup = () => {
       <div class="mb-0">
         <label for="formGroupExampleInput" class="form-label"></label>
         <input
-          type="text"
+          type="file"
           class="form-control"
           id="formGroupExampleInput"
-          placeholder="Enter the group name"
           name="image"
-          onChange={handleChange}
-          value={room.image}
+          onChange={handleImage}
         />
       </div>
       <select

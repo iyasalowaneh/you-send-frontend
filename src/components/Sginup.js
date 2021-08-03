@@ -85,7 +85,7 @@ const Signup = () => {
                   <input
                     type="file"
                     class="form-control"
-                    name="name"
+                    name="image"
                     onChange={handleImage}
                     placeholder="enter your"
                   />
