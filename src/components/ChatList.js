@@ -1,8 +1,8 @@
 import "../Chat.css";
 import ChatItem from "./ChatItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import { addMessage } from "../store/actions/messageAction";
-import { useState } from "react";
+import { useState,useRef ,useEffect } from "react";
 import GroupChatItem from "./GroupChatItem";
 import { addMessagetoGroup } from "../store/actions/messageAction";
 const ChatList = ({ userId, roomId }) => {
@@ -60,19 +60,31 @@ const ChatList = ({ userId, roomId }) => {
     content: "",
     image: "",
   });
+
+  // const [text, setText] = useState("");
+  // const resetForm = () => {
+  //   setText("");
+  // };
+
+  // function handleOnEnter(event) {
+  //   resetForm();
+  //   dispatch(addMessage({ text }));
+  // }
+  
+
+
   const dispatch = useDispatch();
   const handleChange = (event) => {
     SetMessage({ ...message, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-
     dispatch(addMessage(message));
   };
 
   const handleSubmit2 = (event) => {
     event.preventDefault();
-
+    
     dispatch(addMessagetoGroup(message, roomId));
   };
 
@@ -125,20 +137,20 @@ const ChatList = ({ userId, roomId }) => {
                 </span>
               </div>
             </div>
-          </div>
+          </div>            
 
-          <div class="card-body msg_card_body">
-            <div class="d-flex justify-content-start mb-4"></div>
+          <div class="card-body msg_card_body"  >
+<div class="d-flex justify-content-start mb-4"  ></div>
+            
             {userMessage}
             {roomMessage}
           </div>
-
           <div class="card-footer">
             <input type="file" name="image" onChange={handleImage}></input>
 
             {userId > 0 && (
               <form onSubmit={handleSubmit}>
-                <button type="submit" class="fas fa-location-arrow"></button>
+                <button type="submit"  class="fas fa-location-arrow"></button>
                 <textarea
                   onChange={handleChange}
                   name="content"
@@ -153,7 +165,7 @@ const ChatList = ({ userId, roomId }) => {
 
             {roomId > 0 && (
               <form onSubmit={handleSubmit2}>
-                <button type="submit" class="fas fa-location-arrow"></button>
+                <button type="submit"  class="fas fa-location-arrow"></button>
                 <textarea
                   onChange={handleChange}
                   name="content"
@@ -167,7 +179,8 @@ const ChatList = ({ userId, roomId }) => {
             )}
           </div>
         </div>
-      </div>
+      </div>            
+
     </>
   );
 };
