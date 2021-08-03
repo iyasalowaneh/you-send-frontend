@@ -5,15 +5,19 @@ import { useHistory } from "react-router-dom";
 //actions
 import { signup } from "../store/actions/authActions";
 const Signup = () => {
- 
   const [user, SetUser] = useState({
     name: "",
     phonenumber: "",
+    image: "",
+    status: "",
   });
   const dispatch = useDispatch();
   const history = useHistory();
   const handleChange = (event) => {
     SetUser({ ...user, [event.target.name]: event.target.value });
+  };
+  const handleImage = (event) => {
+    SetUser({ ...user, image: event.target.files[0] });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +40,7 @@ const Signup = () => {
                       <i class="fas fa-user"></i>
                     </span>
                   </div>
+
                   <input
                     type="tel"
                     class="form-control"
@@ -45,7 +50,6 @@ const Signup = () => {
                     value={user.phonenumber}
                   />
                 </div>
-
                 <div class="input-group form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -60,8 +64,32 @@ const Signup = () => {
                     placeholder="enter your name"
                     value={user.name}
                   />
+                </div>{" "}
+                <div>
+                  {" "}
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="status"
+                    onChange={handleChange}
+                    placeholder="enter your status"
+                    value={user.status}
+                  />{" "}
                 </div>
-
+                <div class="input-group form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="file"
+                    class="form-control"
+                    name="name"
+                    onChange={handleImage}
+                    placeholder="enter your"
+                  />
+                </div>
                 <button type="submit">get code</button>
               </form>
             </div>

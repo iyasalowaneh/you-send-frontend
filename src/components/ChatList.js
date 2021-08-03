@@ -16,27 +16,36 @@ const ChatList = ({ userId, roomId }) => {
       [userId, user.id].includes(message.senderId) &&
       [userId, user.id].includes(message.reciverId)
   );
-  
+  const userImage = users
+    .filter((user) => user.id === userId)
+    .map((user) => user.image);
+  const u = users
+    .filter((user) => user.id === userId)
+    .map((user) => user.image);
+  const groupImage = rooms
+    .filter((room) => room.id === roomId)
+    .map((room) => room.image);
   userMessage = userMessage.map((message) =>
-    message ? <ChatItem message={message} key={message.id} /> : ""
+    message ? (
+      <ChatItem userImage={userImage} message={message} key={message.id} />
+    ) : (
+      ""
+    )
   );
- 
-  let roomMessage = (roomId)=>{ return messages.filter(
-    (message) =>message.roomId===roomId
-     
-  )}
+  let roomMessage = (roomId) => {
+    return messages.filter((message) => message.roomId === roomId);
+  };
   const room = rooms.find((room) => room.id === roomId);
-  let groupMessages = roomMessage(room?.id)
+  let groupMessages = roomMessage(room?.id);
 
-
-   roomMessage = groupMessages.map((message) =>
-  message ? <GroupChatItem message={message} key={message.id} /> : ""
-);
-
+  roomMessage = groupMessages.map((message) =>
+    message ? <GroupChatItem message={message} key={message.id} /> : ""
+  );
 
   const userName = users
     .filter((user) => user.id === userId)
     .map((user) => user.name);
+
   const groupName = rooms
     .filter((room) => room.id === roomId)
     .map((room) => room.name);
@@ -51,13 +60,13 @@ const ChatList = ({ userId, roomId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-     dispatch(addMessage(message))
+    dispatch(addMessage(message));
   };
 
   const handleSubmit2 = (event) => {
     event.preventDefault();
 
-    dispatch(addMessagetoGroup(message ,roomId))
+    dispatch(addMessagetoGroup(message, roomId));
   };
 
   return (
@@ -96,12 +105,16 @@ const ChatList = ({ userId, roomId }) => {
               <div class="card-header msg_head">
                 <div class="d-flex bd-highlight">
                   <div class="heading-avatar-icon">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                      class="rounded-circle user_img"
-                    />
-                    <span class="online_icon"></span>
-                    <span>Chat with {userName} {groupName}</span>
+                    {room && (
+                      <img src={groupImage} class="rounded-circle user_img" />
+                    )}
+                    {!room && (
+                      <img src={userImage} class="rounded-circle user_img" />
+                    )}
+
+                    <span>
+                      Chat with {userName} {groupName}
+                    </span>
                   </div>
                   <div class="video_cam">
                     <span>
@@ -134,15 +147,7 @@ const ChatList = ({ userId, roomId }) => {
               </div>
 
               <div class="card-body msg_card_body">
-                <div class="d-flex justify-content-start mb-4">
-                  <div class="heading-avatar-icon">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                      class="rounded-circle user_img_msg"
-                    />
-                    <p class="msg_cotainer">ghj</p>
-                  </div>
-                </div>
+                <div class="d-flex justify-content-start mb-4"></div>
                 {userMessage}
                 {roomMessage}
               </div>
@@ -151,41 +156,37 @@ const ChatList = ({ userId, roomId }) => {
                 <div class="input-group">
                   <i class="fas fa-paperclip"></i>
 
+                  {userId > 0 && (
+                    <form onSubmit={handleSubmit}>
+                      <textarea
+                        onChange={handleChange}
+                        name="content"
+                        value={message.content}
+                        class="form-control type_msg"
+                        placeholder="Type your message..."
+                      ></textarea>
+                      <button
+                        type="submit"
+                        class="fas fa-location-arrow"
+                      ></button>
+                    </form>
+                  )}
 
-
-                  { userId > 0 && <form onSubmit={handleSubmit}>
-                  <textarea
-                    onChange={handleChange}
-                    name="content"
-                    value={message.content}
-                    class="form-control type_msg"
-                    placeholder="Type your message..."
-                  ></textarea>
-                  <button
-                    type="submit"
-                    class="fas fa-location-arrow"
-                  ></button>
-                </form>
-                   }
-
-                  {roomId >0  &&   <form onSubmit={handleSubmit2}>
-                    <textarea
-                      onChange={handleChange}
-                      name="content"
-                      value={message.content}
-                      class="form-control type_msg"
-                      placeholder="Type your message..."
-                    ></textarea>
-                    <button
-                      type="submit"
-                      class="fas fa-location-arrow"
-                    ></button>
-                  </form>}
- 
-
-               
-                 
-                  
+                  {roomId > 0 && (
+                    <form onSubmit={handleSubmit2}>
+                      <textarea
+                        onChange={handleChange}
+                        name="content"
+                        value={message.content}
+                        class="form-control type_msg"
+                        placeholder="Type your message..."
+                      ></textarea>
+                      <button
+                        type="submit"
+                        class="fas fa-location-arrow"
+                      ></button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>

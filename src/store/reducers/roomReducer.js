@@ -14,7 +14,15 @@ const roomReducer = (state = initialState, action) => {
         users: action.payload.users,
       };
 
-    
+      case types.UPDATE_USER:
+      const { updateUsers } = action.payload;
+
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === updateUsers.id ? updateUsers : user
+        ),
+      };
     default:
       return state;
   }

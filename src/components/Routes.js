@@ -8,9 +8,9 @@ import RoomList from "./RoomList";
 import ChatList from "./ChatList";
 import Combine from "./Combine";
 import CreateGroup from "./CreateGroup";
+import UserUpdate from "./userUpdate";
 
 function Routes(props) {
-
   return (
     <Switch>
       {/* <Route  path="/:userId">
@@ -27,6 +27,9 @@ function Routes(props) {
       </Route>{" "}
       <Route path="/createGroups">
         <CreateGroup />
+      </Route>{" "}
+      <Route path="/userUpdate">
+        <UserUpdate />
       </Route>
       <Route path="/Verify">
         <Verify />

@@ -1,4 +1,4 @@
-import GroupRoomItem  from "./GroupRoomItem";
+import GroupRoomItem from "./GroupRoomItem";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoom } from "../store/actions/roomListActions";
@@ -7,7 +7,6 @@ const CreateGroup = () => {
   const users = useSelector((state) => state.userReducer.users);
   const rooms = useSelector((state) => state.rooms.rooms);
 
- 
   const foundUsers = users.map((user) => (
     <option key={user.name} value={user.id}>
       {user.name}
@@ -19,6 +18,7 @@ const CreateGroup = () => {
   ));
   const [room, setRoom] = useState({
     name: "",
+    image: "",
   });
 
   const dispatch = useDispatch();
@@ -31,12 +31,13 @@ const CreateGroup = () => {
     event.preventDefault();
     dispatch(createRoom(room, user));
   };
-
+  const handleImage = (event) => {
+    setRoom({ ...room, image: event.target.files[0] });
+  };
   const handleChangeOne = (event) => {
     setUser([...user, +event.target.value]);
   };
   return (
- 
     <form onSubmit={handleSubmit}>
       <div class="mb-0">
         <label for="formGroupExampleInput" class="form-label"></label>
@@ -48,6 +49,18 @@ const CreateGroup = () => {
           name="name"
           onChange={handleChange}
           value={room.name}
+        />
+      </div>{" "}
+      <div class="mb-0">
+        <label for="formGroupExampleInput" class="form-label"></label>
+        <input
+          type="text"
+          class="form-control"
+          id="formGroupExampleInput"
+          placeholder="Enter the group name"
+          name="image"
+          onChange={handleChange}
+          value={room.image}
         />
       </div>
       <select

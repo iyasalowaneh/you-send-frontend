@@ -15,9 +15,9 @@ const x =()=>{
       <ui class="contacts">
           <li class="active">
           <div class="d-flex bd-highlight" onClick={x}>
-              {/* <div class="avatar-icon">
-              <img alt={room.name} src={user.image} />
-            </div> */}
+              <div class="avatar-icon">
+              <img alt={room.name} src={room.image} />
+            </div>
               <div class="user_info">
                 <span>{room.name}</span>
               </div>
