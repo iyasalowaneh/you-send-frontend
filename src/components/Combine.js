@@ -3,11 +3,10 @@ import ChatList from "./ChatList";
 import { DivTow } from "../Styles";
 import { useState } from "react";
 
-const Combine = (props) => {
+const Combine = () => {
 
   const [userId,setUserId]=useState(null)
   const [roomId,setRoomId]=useState(null)
-const[desplay,setDesplay]=useState(null)
   return (
     <DivTow>
       <RoomList setRoomId={setRoomId} setUserId={setUserId} />

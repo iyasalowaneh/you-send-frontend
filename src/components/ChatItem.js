@@ -1,10 +1,9 @@
 import { useReducer } from "react";
 import "../Chat.css";
-
 const ChatItem = (props) => {
   const message = props.message;
   const userImage = props.userImage;
-
+  const user= props.user
   return (
     <>
 
@@ -19,7 +18,8 @@ const ChatItem = (props) => {
         </p>
         <img src={message.image} />
         <img class="rounded-circle user_img_msg" src={userImage} />
-      </div>
+
+           </div>
     </>
   );
 };
