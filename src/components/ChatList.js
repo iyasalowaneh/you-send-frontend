@@ -61,17 +61,6 @@ const ChatList = ({ userId, roomId }) => {
     image: "",
   });
 
-  // const [text, setText] = useState("");
-  // const resetForm = () => {
-  //   setText("");
-  // };
-
-  // function handleOnEnter(event) {
-  //   resetForm();
-  //   dispatch(addMessage({ text }));
-  // }
-  
-
 
   const dispatch = useDispatch();
   const handleChange = (event) => {
@@ -80,12 +69,15 @@ const ChatList = ({ userId, roomId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addMessage(message));
+    SetMessage({...message,content:""});
   };
 
   const handleSubmit2 = (event) => {
     event.preventDefault();
     
     dispatch(addMessagetoGroup(message, roomId));
+    SetMessage({...message,content:""});
+
   };
 
   const handleImage = (event) => {
@@ -145,9 +137,10 @@ const ChatList = ({ userId, roomId }) => {
             {userMessage}
             {roomMessage}
           </div>
-          <div class="card-footer">
-            <input type="file" name="image" onChange={handleImage}></input>
+          
 
+          <div class="card-footer">
+            <input  type="file"  name="image" width="48" height="48" onChange={handleImage}></input>
             {userId > 0 && (
               <form onSubmit={handleSubmit}>
                 <button type="submit"  class="fas fa-location-arrow"></button>

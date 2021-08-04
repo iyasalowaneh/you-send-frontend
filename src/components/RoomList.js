@@ -24,7 +24,8 @@ const RoomList = ({ setUserId, setRoomId }) => {
         key={user.id}
       />
     ));
-  const s = rooms;
+  const s = rooms.flat().map((room)=> room.Users).flat()
+  console.log(s)
 
   const roomLi = rooms
     .filter((room) => room.name.includes(query.toLowerCase()))
